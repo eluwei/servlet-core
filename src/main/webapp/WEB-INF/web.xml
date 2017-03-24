@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0" >
+
+<description>这是一个servlet 学习例子</description>
+<display-name>servlet-core</display-name>
+
+  <!--web.xml的加载过程是context-param >> listener  >> fileter  >> servlet-->
+
+  <!--配置servlet 上下文参数-->
+  <!--下面这个contextConfigLocation 是spring ContextLoaderListener 监听器的一个参数，
+    表示项目启动时，去加载对应的spring配置文件
+  -->
+  <!--<context-param>-->
+      <!--<param-name>contextConfigLocation</param-name>-->
+      <!--<param-value>classpath*:/spring*.xml</param-value>-->
+  <!--</context-param>-->
+
+
+
+
+  <!--web.xml配置filter-->
+  <filter>
+      <filter-name>webXmlFilter</filter-name>
+      <filter-class>org.hong.filter.WebXmlFilter</filter-class>
+      <init-param>
+          <param-name>msg</param-name>
+          <param-value>hello webXmlFilter</param-value>
+      </init-param>
+   </filter>
+   <filter-mapping>
+       <filter-name>webXmlFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+   </filter-mapping>
+
+
+  <!--web.xml中配置servlet-->
+  <servlet>
+     <servlet-name>myFirstServlet</servlet-name>
+     <servlet-class>org.hong.serlvet.MyFirstServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myFirstServlet</servlet-name>
+    <url-pattern>/myFirstServlet</url-pattern>
+  </servlet-mapping>
+
+  <session-config>
+      <!--会话的超时时间间隔 以分钟计算-->
+      <session-timeout>180</session-timeout>
+  </session-config>
+
+
+  <!--欢迎文件列表(项目启动后默认访问页面)-->
+  <welcome-file-list>
+      <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+   <!--对应错误页面-->
+   <error-page>
+       <error-code>404</error-code>
+       <location>/WEB-INF/404.jsp</location>
+   </error-page>
+   <error-page>
+       <error-code>500</error-code>
+       <location>/WEB-INF/500.jsp</location>
+   </error-page>
+
+
+   <!-- 统一给jsp文件设置属性 -->
+   <jsp-config>
+       <jsp-property-group>
+           <url-pattern>*.jsp</url-pattern>
+           <page-encoding>UTF-8</page-encoding>
+       </jsp-property-group>
+   </jsp-config>
+
+
+</web-app>

@@ -27,16 +27,18 @@ public class MyServletContextListener implements ServletContextListener {
         // 如 init-params， url-mapping 等 Servlet 的其他参数。
 
         //手动添加listener
-        context.addListener(CodeServletContextListener.class);
+//        context.addListener(CodeServletContextListener.class);
 
         //手动添加servlet
         ServletRegistration.Dynamic dynamic = context.addServlet("codeServlet", CodeServlet.class);
         dynamic.addMapping("/codeServlet");
 
         //手动添加filter
-        FilterRegistration.Dynamic filterRegistration= context.addFilter("codeFilter","org.hong.filter.CodeFilter");
-        filterRegistration.setInitParameter("msg","hello filter");
-        filterRegistration.addMappingForUrlPatterns(null,false,"/codeServlet","/testCodeFilter");
+        //必须在一个请求涉及的所有Servlet及Filter中都声明asyncSupported=true。
+//        FilterRegistration.Dynamic filterRegistration= context.addFilter("codeFilter","org.hong.filter.CodeFilter");
+//        filterRegistration.setAsyncSupported(true);
+//        filterRegistration.setInitParameter("msg","hello filter");
+//        filterRegistration.addMappingForUrlPatterns(null,false,"/codeServlet","/testCodeFilter");
 
         //给servlet 上下文设置上下文属性 (context.setAttribute()、context.getAttribute().....)
         context.setAttribute("name","zhangsan");
@@ -50,7 +52,7 @@ public class MyServletContextListener implements ServletContextListener {
 
         System.out.println("监听我们的Servlet-core 启动");
         System.out.println("手动添加和配置了CodeServlet......");
-        System.out.println("手动添加和配置了CodeFilter......");
+//        System.out.println("手动添加和配置了CodeFilter......");
         System.out.println("手动添加和配置了CodeListener......");
     }
 

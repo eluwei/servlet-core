@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by hong on 2017/3/16.
  */
-@WebFilter(filterName = "myFilter", urlPatterns = {"/*"}, initParams = {@WebInitParam(name = "name", value = "hello filter")})
+@WebFilter(filterName = "myFilter", urlPatterns = {"/servlet"}, initParams = {@WebInitParam(name = "name", value = "hello filter")})
 public class MyFilter implements Filter {
 
     @Override

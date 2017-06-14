@@ -17,6 +17,12 @@ import java.util.Set;
  */
 public class MyServletContainerInitializer implements ServletContainerInitializer {
 
+
+    /**
+     * 根据servlet3.0规范，servlet容器要负责创建这个文件中定义的类
+     * META-INF/services/javax.servlet.ServletContainerInitializer
+     */
+
     @Override
     public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
         ServletRegistration.Dynamic dynamic = ctx.addServlet("dynamicServlet", DynamicServlet.class);
